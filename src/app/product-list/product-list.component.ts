@@ -1,22 +1,42 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { products } from '../products';
+import { faFacebookF, faTwitterSquare, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
+import { CartService } from '../cart.service';
+
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
+
+  faFacebookF = faFacebookF;
+  faTwitterSquare = faTwitterSquare;
+  faInstagram = faInstagram;
 
   products = products;
+  items;
+  product;
 
-  share() {
+  constructor(private cartService: CartService) {}
+
+  share(): void {
     window.alert('The product has been shared!');
   }
 
-  onNotify() {
+  onNotify(): void {
     window.alert('You will be notified when the product goes on sale');
+  }
+
+  addToCart(product): void {
+    window.alert('Your product has been added to the cart!');
+    this.cartService.addToCart(product);
+  }
+
+  ngOnInit(): void {
+    // console.log(this.products);
   }
 
 }
